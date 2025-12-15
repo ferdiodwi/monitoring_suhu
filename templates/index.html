@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monitoring Suhu & Kelembaban</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <span class="logo-icon">🌡️</span>
+                    <h1>Monitoring Suhu</h1>
+                </div>
+                <div class="connection-status" id="connectionStatus">
+                    <span class="status-dot"></span>
+                    <span class="status-text">Terhubung</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Dashboard -->
+        <main class="dashboard">
+            <!-- Status Card -->
+            <div class="status-card" id="statusCard">
+                <div class="status-icon" id="statusIcon">✓</div>
+                <div class="status-message" id="statusMessage">{{ status_message }}</div>
+            </div>
+
+            <!-- Sensor Cards -->
+            <div class="sensor-grid">
+                <!-- Temperature Card -->
+                <div class="sensor-card temperature-card">
+                    <div class="card-header">
+                        <span class="card-icon">🌡️</span>
+                        <span class="card-title">Suhu</span>
+                    </div>
+                    <div class="card-value">
+                        <span class="value" id="tempValue">{{ temp }}</span>
+                        <span class="unit">°C</span>
+                    </div>
+                    <div class="card-footer">
+                        <div class="gauge-container">
+                            <div class="gauge-bar">
+                                <div class="gauge-fill temp-gauge" id="tempGauge"></div>
+                            </div>
+                            <div class="gauge-labels">
+                                <span>0°C</span>
+                                <span>50°C</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Humidity Card -->
+                <div class="sensor-card humidity-card">
+                    <div class="card-header">
+                        <span class="card-icon">💧</span>
+                        <span class="card-title">Kelembaban</span>
+                    </div>
+                    <div class="card-value">
+                        <span class="value" id="humValue">{{ hum }}</span>
+                        <span class="unit">%</span>
+                    </div>
+                    <div class="card-footer">
+                        <div class="gauge-container">
+                            <div class="gauge-bar">
+                                <div class="gauge-fill hum-gauge" id="humGauge"></div>
+                            </div>
+                            <div class="gauge-labels">
+                                <span>0%</span>
+                                <span>100%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Info Panel -->
+            <div class="info-panel">
+                <div class="info-item">
+                    <span class="info-label">Update Terakhir</span>
+                    <span class="info-value" id="lastUpdate">{{ last_update }}</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Rentang Suhu Ideal</span>
+                    <span class="info-value">20°C - 28°C</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Sensor</span>
+                    <span class="info-value">DHT22</span>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>ESP32 + DHT22 + Firebase Realtime Database</p>
+            <p class="version">v1.0.0</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+
+</html>
